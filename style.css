@@ -1,0 +1,126 @@
+
+body {
+    font-family: 'Arvo', serif;
+    background: #00081A;
+    color: aliceblue;
+    transform-style: preserve-3d;
+    perspective: 700px;
+    margin: 0;
+}
+
+#wrapper {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+}
+
+#background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: #07102A;
+    /* The one below is a little too dark... */
+    /* Might work well for the second layer */
+    color: rgba(7, 16, 42, 0.45);
+    color: rgba(140, 140, 140, 0.7);
+    margin: 0 !important;
+    width: 100vw;
+    height: 100vh;
+    font-family: 'Teko', sans-serif;
+}
+
+.text-container {
+    position: absolute;
+    text-align: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.text-container p {
+    margin: 0;
+}
+
+.large {
+    font-size: 25em;
+}
+
+.large p {
+    margin-top: 5rem;
+}
+
+.light {
+    color: rgba(51, 68, 117, 0.322);
+    /* color: rgba(140, 140, 140, 0.7); */
+}
+
+.dark {
+    color: rgba(7, 16, 42, 0.45);
+}
+
+.bg-text {
+    position: absolute;
+}
+
+#select1 {
+    transform: translateX(-140px) translateY(-100px) translateZ(210px) rotateY(100deg) rotateX(-50deg) rotateZ(-10deg);
+}
+
+#select2 {
+    transform: translateX(140px) translateY(-100px) translateZ(210px) rotateY(-100deg) rotateX(-50deg) rotateZ(10deg);
+}
+
+#select3 {
+    transform: translateX(-100px) translateY(100px) translateZ(210px) rotateY(100deg) rotateX(60deg) rotateZ(10deg);
+}
+
+#select4 {
+    transform: translateX(100px) translateY(100px) translateZ(210px) rotateY(-100deg) rotateX(60deg) rotateZ(-10deg);
+}
+
+/* Background Select Icons */
+#back-select1 {
+    transform: translateX(-140px) translateY(-100px) translateZ(320px) rotateY(100deg) rotateX(-50deg) rotateZ(-10deg);
+}
+
+#back-select2 {
+    transform: translateX(140px) translateY(-100px) translateZ(320px) rotateY(-100deg) rotateX(-50deg) rotateZ(10deg);
+}
+
+#back-select3 {
+    transform: translateX(-100px) translateY(100px) translateZ(320px) rotateY(100deg) rotateX(60deg) rotateZ(10deg);
+}
+
+#back-select4 {
+    transform: translateX(100px) translateY(100px) translateZ(320px) rotateY(-100deg) rotateX(60deg) rotateZ(-10deg);
+}
+
+
+#content {
+    margin: 0rem 3rem 0rem 3rem;
+    transform: translateX(0rem);
+
+    max-height: 100vh;
+    overflow-y: scroll;
+    scrollbar-width: none;
+}
+
+#content::-webkit-scrollbar { 
+    display: none; 
+}
+
+
+
+#header {
+    text-align: center;
+}
+
+
+#control {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+
+
+
+
