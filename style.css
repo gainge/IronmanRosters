@@ -49,7 +49,7 @@ body {
 }
 
 .light {
-    color: rgba(51, 68, 117, 0.322);
+    color: rgba(29, 42, 80, 0.322);
     /* color: rgba(140, 140, 140, 0.7); */
 }
 
@@ -63,36 +63,101 @@ body {
 
 #select1 {
     transform: translateX(-140px) translateY(-100px) translateZ(210px) rotateY(100deg) rotateX(-50deg) rotateZ(-10deg);
+    animation-name: shift1;
 }
 
 #select2 {
     transform: translateX(140px) translateY(-100px) translateZ(210px) rotateY(-100deg) rotateX(-50deg) rotateZ(10deg);
+    animation-name: shift2;
 }
 
 #select3 {
     transform: translateX(-100px) translateY(100px) translateZ(210px) rotateY(100deg) rotateX(60deg) rotateZ(10deg);
+    animation-name: shift3;
 }
 
 #select4 {
     transform: translateX(100px) translateY(100px) translateZ(210px) rotateY(-100deg) rotateX(60deg) rotateZ(-10deg);
+    animation-name: shift4;
 }
 
 /* Background Select Icons */
 #back-select1 {
-    transform: translateX(-140px) translateY(-100px) translateZ(320px) rotateY(100deg) rotateX(-50deg) rotateZ(-10deg);
+    transform: translateX(-140px) translateY(-100px) translateZ(280px) rotateY(100deg) rotateX(-50deg) rotateZ(-10deg);
+    animation-name: back-shift1;
 }
 
 #back-select2 {
-    transform: translateX(140px) translateY(-100px) translateZ(320px) rotateY(-100deg) rotateX(-50deg) rotateZ(10deg);
+    transform: translateX(140px) translateY(-100px) translateZ(280px) rotateY(-100deg) rotateX(-50deg) rotateZ(10deg);
+    animation-name: back-shift2;
 }
 
 #back-select3 {
-    transform: translateX(-100px) translateY(100px) translateZ(320px) rotateY(100deg) rotateX(60deg) rotateZ(10deg);
+    transform: translateX(-100px) translateY(100px) translateZ(280px) rotateY(100deg) rotateX(60deg) rotateZ(10deg);
+    animation-name: back-shift3;
 }
 
 #back-select4 {
-    transform: translateX(100px) translateY(100px) translateZ(320px) rotateY(-100deg) rotateX(60deg) rotateZ(-10deg);
+    transform: translateX(100px) translateY(100px) translateZ(280px) rotateY(-100deg) rotateX(60deg) rotateZ(-10deg);
+    animation-name: back-shift4;
 }
+
+
+/* Animation Configurations */
+.large {
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: ease-in-out;
+}
+
+.dark {
+    /* animation-duration: 1.9s; */
+}
+
+.bottom {
+    animation-duration: 1.9s;
+}
+
+
+
+/* Animations */
+@keyframes shift1 {
+    from {transform: translateX(-140px) translateY(-100px) translateZ(200px) rotateY(100deg) rotateX(-50deg) rotateZ(-10deg);}
+    to {transform: translateX(-140px) translateY(-100px) translateZ(280px) rotateY(100deg) rotateX(-50deg) rotateZ(-10deg);}
+}
+@keyframes shift2 {
+    from {transform: translateX(140px) translateY(-100px) translateZ(200px) rotateY(-100deg) rotateX(-50deg) rotateZ(10deg);}
+    to {transform: translateX(140px) translateY(-100px) translateZ(280px) rotateY(-100deg) rotateX(-50deg) rotateZ(10deg);}
+}
+@keyframes shift3 {
+    from {transform: translateX(-100px) translateY(100px) translateZ(200px) rotateY(100deg) rotateX(60deg) rotateZ(10deg);}
+    to {transform: translateX(-100px) translateY(100px) translateZ(280px) rotateY(100deg) rotateX(60deg) rotateZ(10deg);}
+}
+@keyframes shift4 {
+    from {transform: translateX(100px) translateY(100px) translateZ(200px) rotateY(-100deg) rotateX(60deg) rotateZ(-10deg);}
+    to {transform: translateX(100px) translateY(100px) translateZ(280px) rotateY(-100deg) rotateX(60deg) rotateZ(-10deg);}
+}
+/* Back Elements */
+@keyframes back-shift1 {
+    from {transform: translateX(-140px) translateY(-100px) translateZ(280px) rotateY(100deg) rotateX(-50deg) rotateZ(-10deg);}
+    to {transform: translateX(-140px) translateY(-100px) translateZ(210px) rotateY(100deg) rotateX(-50deg) rotateZ(-10deg);}
+}
+@keyframes back-shift2 {
+    from {transform: translateX(140px) translateY(-100px) translateZ(280px) rotateY(-100deg) rotateX(-50deg) rotateZ(10deg);}
+    to {transform: translateX(140px) translateY(-100px) translateZ(210px) rotateY(-100deg) rotateX(-50deg) rotateZ(10deg);}
+}
+@keyframes back-shift3 {
+    from {transform: translateX(-100px) translateY(100px) translateZ(280px) rotateY(100deg) rotateX(60deg) rotateZ(10deg);}
+    to {transform: translateX(-100px) translateY(100px) translateZ(210px) rotateY(100deg) rotateX(60deg) rotateZ(10deg);}
+}
+@keyframes back-shift4 {
+    from {transform: translateX(100px) translateY(100px) translateZ(280px) rotateY(-100deg) rotateX(60deg) rotateZ(-10deg);}
+    to {transform: translateX(100px) translateY(100px) translateZ(210px) rotateY(-100deg) rotateX(60deg) rotateZ(-10deg);}
+}
+
+
+
 
 
 #content {
