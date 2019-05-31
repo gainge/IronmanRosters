@@ -27,6 +27,13 @@ body {
     width: 100vw;
     height: 100vh;
     font-family: 'Teko', sans-serif;
+
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
+
+    z-index: -100;
 }
 
 .text-container {
@@ -48,6 +55,16 @@ body {
     margin-top: 5rem;
 }
 
+.small {
+    font-size: 9rem;
+    color: rgba(52, 65, 107, 0.322);
+    /* color: white; */
+}
+
+.small p {
+    margin-top: 15rem;
+}
+
 .light {
     color: rgba(29, 42, 80, 0.322);
     /* color: rgba(140, 140, 140, 0.7); */
@@ -61,6 +78,7 @@ body {
     position: absolute;
 }
 
+/* Standard Selects */
 #select1 {
     transform: translateX(-140px) translateY(-100px) translateZ(210px) rotateY(100deg) rotateX(-50deg) rotateZ(-10deg);
     animation-name: shift1;
@@ -103,12 +121,56 @@ body {
 }
 
 
+/* Small Select Icons */
+#small-select1 {
+    transform: translateX(-140px) translateY(-160px) translateZ(-60px) rotateY(100deg) rotateX(-50deg) rotateZ(-10deg);
+    animation-name: small-shift1;
+}
+
+#small-select2 {
+    transform: translateX(-140px) translateY(-100px) translateZ(-110px) rotateY(100deg) rotateX(-50deg) rotateZ(-10deg);
+    animation-name: small-shift2;
+}
+
+#small-select3 {
+    transform: translateX(140px) translateY(-100px) translateZ(210px) rotateY(-100deg) rotateX(-50deg) rotateZ(10deg);
+    animation-name: small-shift3;
+}
+
+#small-select4 {
+    transform: translateX(-140px) translateY(70px) translateZ(-50px) rotateY(100deg) rotateX(60deg) rotateZ(10deg);
+    font-size: 11rem;
+    animation-name: small-shift4;
+}
+
+#small-select5 {
+    transform: translateX(0px) translateY(120px) translateZ(210px) rotateY(100deg) rotateX(60deg) rotateZ(10deg);
+    font-size: 5rem;
+    animation-name: small-shift5;
+}
+
+
 /* Animation Configurations */
 .large {
     animation-duration: 2s;
     animation-iteration-count: infinite;
     animation-direction: alternate;
     animation-timing-function: ease-in-out;
+}
+
+.small {
+    animation-duration: 3.4s;
+    animation-iteration-count: infinite;
+    /* animation-direction: alternate; */
+    animation-timing-function: linear;
+}
+
+.fast {
+    animation-duration: 1.7s;
+}
+
+.slow {
+    animation-duration: 3.4s;
 }
 
 .dark {
@@ -156,6 +218,31 @@ body {
     to {transform: translateX(100px) translateY(100px) translateZ(210px) rotateY(-100deg) rotateX(60deg) rotateZ(-10deg);}
 }
 
+/* Small Elements */
+@keyframes small-shift1 {
+    from {transform: translateX(-140px) translateY(-160px) translateZ(-60px) rotateY(100deg) rotateX(-50deg) rotateZ(-10deg);}
+    to {transform: translateX(-140px) translateY(-160px) translateZ(1600px) rotateY(100deg) rotateX(-50deg) rotateZ(-10deg);}
+}
+
+@keyframes small-shift2 {
+    from {transform: translateX(-140px) translateY(-100px) translateZ(-110px) rotateY(100deg) rotateX(-50deg) rotateZ(-10deg);}
+    to {transform: translateX(-140px) translateY(-100px) translateZ(1600px) rotateY(100deg) rotateX(-50deg) rotateZ(-10deg);}
+}
+
+@keyframes small-shift3 {
+    from {transform: translateX(140px) translateY(-100px) translateZ(-210px) rotateY(-100deg) rotateX(-50deg) rotateZ(10deg);}
+    to {transform: translateX(140px) translateY(-100px) translateZ(1300px) rotateY(-100deg) rotateX(-50deg) rotateZ(10deg);}
+}
+
+@keyframes small-shift4 {
+    from {transform: translateX(-140px) translateY(70px) translateZ(-50px) rotateY(100deg) rotateX(60deg) rotateZ(10deg);}
+    to {transform: translateX(-140px) translateY(70px) translateZ(900px) rotateY(100deg) rotateX(60deg) rotateZ(10deg);}
+}
+
+@keyframes small-shift5 {
+    from {transform: translateX(0px) translateY(120px) translateZ(-10px) rotateY(100deg) rotateX(60deg) rotateZ(10deg);}
+    to {transform: translateX(0px) translateY(120px) translateZ(1400px) rotateY(100deg) rotateX(60deg) rotateZ(10deg);}
+}
 
 
 
