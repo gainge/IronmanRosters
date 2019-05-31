@@ -59,10 +59,22 @@ function rangeValidationCurry(min, max) {
   }
 }
 
-const inputFilters = new Map([
-  ["input-players", rangeValidationCurry(1, 4)],
-  ["input-characters", rangeValidationCurry(1, 23)],
+const inputRanges = new Map([
+  ["input-players", {low: 1, high: 4}],
+  ["input-chars", {low: 1, high: 23}],
 ])
+
+var inputFilters = [];
+
+inputRanges.forEach(function(range, inputID) {
+  inputFilters.push([inputID, rangeValidationCurry(range.low, range.high)]);
+});
+
+// Turn it into a map so we can index by ID
+inputFilters = new Map(inputFilters);
+
+
+
 
 
 
@@ -70,9 +82,65 @@ var roster = [];
 
 
 
-
-
 // Event Handlers
+
+function validateRange(inputID) {
+  var input = document.getElementById(inputID);
+  var range = inputRanges.get(inputID);
+
+  if (!range) return;
+
+  console.log("yo");
+
+  var value = input.value;
+
+  if (isNumeric(value)) {
+    value = parseInt(value);
+
+    if (value < range.low) {
+      input.value = range.low;
+    } else if (value > range.high) {
+      input.value = range.high;
+    }
+
+  } else {
+    input.value = "1";
+  }
+}
+
+function applyStepCurry(stepVal) {
+  return function(inputID) {
+    var input = document.getElementById(inputID);
+
+    if (!input) return;
+
+    var value = input.value;
+
+    if (isNumeric(value)) {
+      // Everything is good to go!
+      value = parseInt(value);
+
+      // Increment only if within range
+      if (inputFilters.get(inputID)(value + stepVal)) {
+        input.value = value + stepVal;
+      } else {
+        input.value = "1";
+      }
+    } else {
+      input.value = "1";
+    }
+  }
+}
+
+var incField = applyStepCurry(1);
+var decField = applyStepCurry(-1);
+
+
+
+// Helper Functions
+function isNumeric(value) {
+  return !isNaN(value);
+}
 
 
 // I'm going to try to restrict the input on my own

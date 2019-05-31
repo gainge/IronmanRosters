@@ -28,12 +28,12 @@
                         <p>Players</p>
                         <div class="input-container">
                             <div>
-                                <input id="input-players" type="text" value="1"/>
+                                <input id="input-players" type="text" value="1" onchange="validateRange('input-players')"/>
                             </div>
                             <div>
                                 <div class="double-stack">
-                                    <button id="inc-players">+</button>
-                                    <button id="dec-players">-</button>
+                                    <button id="inc-players" onclick="incField('input-players')">+</button>
+                                    <button id="dec-players" onclick="decField('input-players')">-</button>
                                 </div>
                             </div>
                         </div>
@@ -44,12 +44,12 @@
                             <p>Characters/Player</p>
                             <div class="input-container">
                                 <div>
-                                    <input type="text" id="input-chars" value="5">
+                                    <input type="text" id="input-chars" value="5" onchange="validateRange('input-chars')">
                                 </div>
                                 <div>
                                     <div class="double-stack">
-                                        <button>+</button>
-                                        <button>-</button>
+                                        <button onclick="incField('input-chars')">+</button>
+                                        <button onclick="decField('input-chars')">-</button>
                                     </div>
                                 </div>
                             </div>
