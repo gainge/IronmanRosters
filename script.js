@@ -53,6 +53,18 @@ const meleeStocks = {
 }
 
 
+function rangeValidationCurry(min, max) {
+  return function(val) {
+    return (val >= min && val <= max);
+  }
+}
+
+const inputFilters = new Map([
+  ["input-players", rangeValidationCurry(1, 4)],
+  ["input-characters", rangeValidationCurry(1, 23)],
+])
+
+
 
 var roster = [];
 
@@ -60,10 +72,39 @@ var roster = [];
 
 
 
-
-
 // Event Handlers
 
+
+// I'm going to try to restrict the input on my own
+// I'm going to steal that guy's strategy of using a higher order function tho
+
+function applyInputFilter(filter, input) {
+  // For every event we need to check the
+  ["input"].forEach(function(event) {
+    input.addEventListener(event, function(e) {
+      // Test out the filter against the value
+      if (filter(e.target.value) || !e.target.value) {
+
+      } else if (this.hasOwnProperty("oldValue")) {
+
+      } else {
+        
+      }
+    });
+  });
+}
+
+function applyInputFilterForID(id) {  
+  applyInputFilter(inputFilters.get(id), document.getElementById(id));
+}
+
+
+applyInputFilterForID("input-players");
+
+// document.getElementById("input-players").addEventListener("input", function(e) {
+//   console.log(this.value + "[" + this.oldValue + "]");
+//   this.oldValue = this.value;
+// })
 
 
 

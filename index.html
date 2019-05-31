@@ -24,15 +24,41 @@
 
             <div id="main-body">
                 <div id="control">
-                    <div id="players-control">
+                    <div class="input-parent double-stack" id="players-control">
                         <p>Players</p>
+                        <div class="input-container">
+                            <div>
+                                <input id="input-players" type="text" value="1"/>
+                            </div>
+                            <div>
+                                <div class="double-stack">
+                                    <button id="inc-players">+</button>
+                                    <button id="dec-players">-</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div>
-                        <p>Characters/Player</p>
+                        <div class="input-parent double-stack" id="chars-control">
+                            <p>Characters/Player</p>
+                            <div class="input-container">
+                                <div>
+                                    <input type="text" id="input-chars" value="5">
+                                </div>
+                                <div>
+                                    <div class="double-stack">
+                                        <button>+</button>
+                                        <button>-</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div>
+                    <div></div>
+                    <div id="generate-control">
                         <p>Generate Rosters lul</p>
+                        <button id="generate">Generate!</button>
                     </div>
                     
                 </div>

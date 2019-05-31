@@ -8,6 +8,10 @@ body {
     margin: 0;
 }
 
+button {
+    cursor: pointer;
+}
+
 #wrapper {
     position: relative;
     width: 100vw;
@@ -59,7 +63,59 @@ body {
 
 #control {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    /* grid-template-columns: repeat(3, 1fr); */
+    grid-template-columns: 1fr 1fr 4fr 2fr;
+}
+
+.double-stack {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-row-gap: 0.1rem;
+}
+
+.input-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 3fr;
+    grid-column-gap: 0.3rem;
+}
+
+.input-container input {
+    width: 4rem;
+    height: 2.4rem;
+    margin: 0;
+    font-size: 2rem;
+    text-align: center;
+}
+
+.input-container button {
+    font-size: 1rem;
+    padding-left: 0;
+    padding-right: 0;
+    border-radius: 0.1rem;
+    background: ghostwhite;
+    border: none;
+    width: 3rem;
+}
+
+.input-container button:hover {
+    background: rgb(231, 231, 243);
+}
+
+#generate-control {
+    text-align: center;
+}
+
+
+#generate {
+    border: none;
+    background: goldenrod;
+    border-radius: 3px;
+    font-size: 2rem;
+    margin: auto;
+}
+
+#generate:hover {
+    background: rgb(241, 184, 37);
 }
 
 
