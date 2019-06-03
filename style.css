@@ -1,3 +1,11 @@
+@font-face {
+    font-family: "Melee";
+    src: url("res/fonts/galliarditcbybt-ultra-webfont.eot");
+    src: url("res/fonts/galliarditcbybt-ultra-webfont.woff") format("woff"),
+    url("res/fonts/galliarditcbybt-ultra-webfont.svg#filename") format("svg");
+    /* galliarditcbybt-ultra-webfont.ttf */
+}
+
 
 body {
     font-family: 'Arvo', serif;
@@ -57,7 +65,17 @@ button {
 
 
 #header {
+    font-family: "Melee";
+    font-size: 3rem;
+    background: -webkit-linear-gradient(rgb(0, 0, 0), rgb(0, 0, 0), rgb(0, 0, 0), rgb(179, 53, 53), rgb(179, 53, 53));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 1px white;
     text-align: center;
+}
+
+#header h3 {
+    margin: 2rem 0rem 2rem 0rem; 
 }
 
 
@@ -125,13 +143,24 @@ button {
 /* Roster Shenanigans */
 .roster-parent {
     display: grid;
-    grid-template-columns: 4fr 1fr;
+    grid-template-columns: 1fr 3fr 1fr;
     background: gray;
 
     margin-top: 1rem;
     margin-bottom: 1rem;
 
-    padding: 1rem 0rem 1rem 0rem;
+}
+
+.player-label h1 {
+    text-align: center;
+    color: black;
+    margin-left: 1rem;
+}
+
+.player-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .roster-container {
@@ -140,8 +169,6 @@ button {
     justify-content:center;
     align-content:center;
     align-items:center;
-
-    padding: 0rem 0rem 0rem 7rem;
 
     border-radius: 2px;
 }
@@ -163,12 +190,22 @@ button {
     border-radius: 2px;
 }
 
+.shuffle-parent {
+    display: flex;
+    align-items: center;
+}
+
 
 .shuffle {
     background: cyan;
     font-size: 1.5rem;
     font-family: monospace;
     margin-left: 0.65rem;
+    background-image: url('./res/shuffle.svg');
+    background-repeat: no-repeat;
+    padding-right: 2rem;
+    background-position: right;
+    max-height: 2rem;
 }
 
 img.stock-icon  {

@@ -275,6 +275,14 @@ function generateRosters(numPlayers, numChars) {
     var rosterParent = document.createElement("div");
     rosterParent.classList.add("roster-parent");
 
+    // Add the player label
+    var playerLabelContainer = document.createElement("div");
+    playerLabelContainer.classList.add("player-label");
+    var playerLabel = document.createElement("h1");
+    playerLabel.appendChild(document.createTextNode("Player " + (player + 1) + ":"))
+    playerLabelContainer.appendChild(playerLabel);
+    rosterParent.appendChild(playerLabelContainer);
+
     // Create a spot for the roster
     var currentRoster = document.createElement("div");
     currentRoster.classList.add("roster-container");    
@@ -300,6 +308,7 @@ function generateRosters(numPlayers, numChars) {
 
 function createShuffleButton(rosterID, numChars) {
   var buttonContainer = document.createElement("div");
+  buttonContainer.classList.add("shuffle-parent");
   var button = document.createElement("button");
   button.classList.add("shuffle");
   button.onclick = () => fillRoster(rosterID, numChars);
@@ -321,10 +330,9 @@ function fillRoster(rosterID, numChars) {
     return;
   }
 
-  // Clear the contents of the roster
-  roster.innerHTML = "";
-
+  // Create the character icons
   var rosterCharacters = getCharacters(numChars);
+  var characterIcons = [];
 
   // Make a cool temp list :)
   rosterCharacters.forEach(character => {
@@ -333,7 +341,14 @@ function fillRoster(rosterID, numChars) {
 
     characterContainer.appendChild(getStockIcon(currentGame, character));
 
-    roster.appendChild(characterContainer);
+    characterIcons.push(characterContainer);
+  });
+
+  // Clear the contents of the roster
+  roster.innerHTML = "";
+  // Then add the images!
+  characterIcons.forEach(icon => {
+    roster.appendChild(icon);
   })
 }
 
