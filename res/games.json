@@ -1,0 +1,39 @@
+{
+    "melee": {
+        "subdir": "melee",
+        "chars": [
+          "bowser.png",
+          "dk.png",
+          "doc.png",
+          "falco.png",
+          "falcon.png",
+          "fox.png",
+          "ganon.png",
+          "gnw.png",
+          "ics.png",
+          "kirby.png",
+          "link.png",
+          "luigi.png",
+          "mario.png",
+          "marth.png",
+          "mewtwo.png",
+          "ness.png",
+          "peach.png",
+          "pichu.png",
+          "pikachu.png",
+          "puff.png",
+          "roy.png",
+          "samus.png",
+          "sheik.png",
+          "ylink.png",
+          "yoshi.png",
+          "zelda.png"
+        ]
+      },
+    "ultimate": {
+        "subdir": "ultimate",
+        "chars": [
+            "../crazyhand.png"
+        ]
+    }
+}
