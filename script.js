@@ -2,7 +2,14 @@
 const MELEE = "melee";
 const ULTIMATE = "ultimate";
 
-var game = MELEE;
+const DEFAULT_IMG = "./res/crazyhand.png";
+
+var gameTitle = MELEE;
+
+var defaultImage = new Image;
+defaultImage.src = DEFAULT_IMG;
+
+var images = [];
 
 
 // Let's start manipulating the dom, yeah?
@@ -58,6 +65,69 @@ const meleeStocks = {
 }
 
 
+const GAMES_DATA = "res/games.json";
+
+function loadJSON(callback) {
+  var xobj = new XMLHttpRequest();
+  xobj.overrideMimeType("application/json");
+  xobj.open('GET', GAMES_DATA, true);
+  xobj.onreadystatechange = function() {
+    if (xobj.readyState == 4 && xobj.status == "200") {
+      callback(xobj.responseText);
+    }
+  }
+
+  xobj.send(null);
+}
+
+
+function setCurrentGame(gameTitle) {
+  switch (gameTitle) {
+    case MELEE:
+      currentGame = games.melee;
+      break;
+    case ULTIMATE:
+      currentGame = games.ultimate;
+      break;
+    default:
+      break;
+  }
+
+  // Set up the input ranges?
+
+  // Set up the images?
+  if (!currentGame.images) {
+    loadCharacterImages(currentGame);
+  }
+}
+
+function loadCharacterImages(game) {
+  if (game.images) return;
+
+  game.images = [];
+
+  game.chars.forEach(charImage => {
+    var fileName = getImagePath(game, charImage);
+    var img = new Image(60, 60);
+    img.classList.add("hidden");
+    img.src = fileName;
+    // document.body.appendChild(img);
+  })
+}
+
+function getImagePath(game, charImage) {
+  return IMAGE_DIR + "/" + game.subdir + "/" + charImage;
+}
+
+// Load the game data
+var games = null;
+var currentGame = null;
+loadJSON((data) => {
+  games = JSON.parse(data);
+  setCurrentGame(MELEE);
+});
+
+
 function rangeValidationCurry(min, max) {
   return function(val) {
     return (val >= min && val <= max);
@@ -66,7 +136,7 @@ function rangeValidationCurry(min, max) {
 
 const inputRanges = new Map([
   ["input-players", {low: 1, high: 4}],
-  ["input-chars", {low: 1, high: 23}],
+  ["input-chars", {low: 1, high: 26}],
 ])
 
 var inputFilters = [];
@@ -189,15 +259,6 @@ function applyInputFilterForID(id) {
 
 applyInputFilterForID("input-players");
 
-// document.getElementById("input-players").addEventListener("input", function(e) {
-//   console.log(this.value + "[" + this.oldValue + "]");
-//   this.oldValue = this.value;
-// })
-
-
-
-
-
 
 // Helper functions
 function joinImagePath(baseDir, subdir, fileName) {
@@ -216,7 +277,8 @@ function generateRosters(numPlayers, numChars) {
 
     // Create a spot for the roster
     var currentRoster = document.createElement("div");
-    currentRoster.classList.add("roster-container");    var rosterID = "player-" + player;
+    currentRoster.classList.add("roster-container");    
+    var rosterID = "player-" + player;
     currentRoster.id = rosterID;
 
     // Add the roster to the parent
@@ -269,10 +331,20 @@ function fillRoster(rosterID, numChars) {
     var characterContainer = document.createElement("div");
     characterContainer.classList.add("character-container");
 
-    characterContainer.innerText = character;
+    characterContainer.appendChild(getStockIcon(currentGame, character));
 
     roster.appendChild(characterContainer);
   })
+}
+
+function getStockIcon(game, characterIndex) {
+  var charImage = game.chars[characterIndex];
+  var fileName = getImagePath(game, charImage);
+  var img = new Image(60, 60);
+  img.classList.add("stock-icon");
+  img.src = fileName;
+
+  return img;
 }
 
 function getCharacters(numChars) {
