@@ -119,6 +119,54 @@ button {
 }
 
 
+/* Roster Shenanigans */
+.roster-parent {
+    display: grid;
+    grid-template-columns: 8fr 1fr;
+    background: gray;
+
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+
+    padding: 1rem 0rem 1rem 0rem;
+}
+
+.roster-container {
+    display:flex;
+    flex-flow: row wrap;
+    justify-content:center;
+    align-content:center;
+    align-items:center;
+
+    padding: 0rem 7rem 0rem 7rem;
+
+    border-radius: 2px;
+}
+
+.character-container {
+    background: red;
+    text-align: center;
+
+    min-width: 4rem;
+    max-width: 4rem;
+    min-height: 4rem;
+    max-height: 4rem;
+
+    flex: 0 1 auto;
+
+    margin: 0.5rem 2rem 0.5rem 2rem;
+
+    align-self: center;
+
+    border-radius: 2px;
+}
+
+
+.shuffle {
+    background: cyan;
+}
+
+
 
 
 

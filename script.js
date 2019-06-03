@@ -1,4 +1,9 @@
 
+const MELEE = "melee";
+const ULTIMATE = "ultimate";
+
+var game = MELEE;
+
 
 // Let's start manipulating the dom, yeah?
 
@@ -74,15 +79,30 @@ inputRanges.forEach(function(range, inputID) {
 inputFilters = new Map(inputFilters);
 
 
-
-
-
-
-var roster = [];
-
-
-
 // Event Handlers
+function handleGenerateClick() {
+  var numPlayers = document.getElementById("input-players").value;
+  var numChars = document.getElementById("input-chars").value;
+
+  // Do some basic input validation
+  if (!isNumeric(numPlayers) || !isNumeric(numChars)) {
+    alert("Please only input numbers");
+  }
+
+  // Now that they're numbers, we should do some validation on the ranges just to be safe
+  numPlayers = parseInt(numPlayers);
+  numChars = parseInt(numChars);
+  // TODO: restructure data so that we validate ranges based on game state 
+  // For now we'll just do the basic way though
+  if (!inputFilters.get("input-players")(numPlayers) ||
+      !inputFilters.get("input-chars")(numPlayers)) {
+        alert("Input values are out of range!");
+      }
+
+  // Otherwise we're finally good to go!
+  generateRosters(numPlayers, numChars);
+}
+
 
 function validateRange(inputID) {
   var input = document.getElementById(inputID);
@@ -182,4 +202,111 @@ applyInputFilterForID("input-players");
 // Helper functions
 function joinImagePath(baseDir, subdir, fileName) {
   return baseDir + "/" + subdir + "/" + fileName;
+}
+
+function generateRosters(numPlayers, numChars) {
+  var rosters = document.getElementById("rosters");
+  rosters.innerHTML = "";
+
+  // Generate a roster for each player
+  for (var player = 0; player < numPlayers; player++) {
+    // Create the roster parent
+    var rosterParent = document.createElement("div");
+    rosterParent.classList.add("roster-parent");
+
+    // Create a spot for the roster
+    var currentRoster = document.createElement("div");
+    currentRoster.classList.add("roster-container");    var rosterID = "player-" + player;
+    currentRoster.id = rosterID;
+
+    // Add the roster to the parent
+    rosterParent.appendChild(currentRoster);
+
+    // Create the shuffle button
+    var buttonContainer = createShuffleButton(rosterID, numChars);
+
+    // Add the shuffle button to the parent
+    rosterParent.appendChild(buttonContainer);
+
+    // Add the parent to the list of all rosters
+    rosters.appendChild(rosterParent);
+
+    // Fill the roster
+    fillRoster(rosterID, numChars);
+  }
+}
+
+function createShuffleButton(rosterID, numChars) {
+  var buttonContainer = document.createElement("div");
+  var button = document.createElement("button");
+  button.classList.add("shuffle");
+  button.onclick = () => fillRoster(rosterID, numChars);
+  button.innerText = "Shuffle";
+
+  // Add the button to it's container
+  buttonContainer.appendChild(button);
+
+  return buttonContainer;
+}
+
+
+
+
+function fillRoster(rosterID, numChars) {
+  var roster = document.getElementById(rosterID);
+  if (!roster) {
+    console.log("Error!  Roster with ID: [" + rosterID + "] not found!");
+    return;
+  }
+
+  // Clear the contents of the roster
+  roster.innerHTML = "";
+
+  var rosterCharacters = getCharacters(numChars);
+
+  // Make a cool temp list :)
+  rosterCharacters.forEach(character => {
+    var characterContainer = document.createElement("div");
+    characterContainer.classList.add("character-container");
+
+    characterContainer.innerText = character;
+
+    roster.appendChild(characterContainer);
+  })
+}
+
+function getCharacters(numChars) {
+  // This is where we can do some sick random number stuff
+  
+  var indices = [];
+  // TODO: Again, update to be more dynamic but w/e
+  var characters = meleeStocks.chars;
+
+  for (var i = 0 ; i < characters.length; i++) {
+    indices.push(i);
+  }
+
+  shuffle(indices);
+
+  indices = indices.filter((_, index) => index < numChars);
+
+  return indices;
+}
+
+function shuffle(array) {
+  var count = array.length;
+
+  while (count > 0) {
+    // Pick a random index to swap
+    var index = Math.floor(Math.random() * count);
+
+    count--;
+
+    // Swap the elements at the specified indices
+    var temp = array[count]
+    array[count] = array[index];
+    array[index] = temp;
+  }
+
+  return array;
 }
