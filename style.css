@@ -145,7 +145,6 @@ button {
 /* Game Selector */
 #radio-container {
     text-align: center;
-    margin-left: 2rem;
 }
 
 .radio-toolbar input[type="radio"] {
@@ -214,14 +213,9 @@ button {
 .character-container {
     text-align: center;
 
-    min-width: 4rem;
-    max-width: 4rem;
-    min-height: 4rem;
-    max-height: 4rem;
-
     flex: 0 1 auto;
 
-    margin: 0.5rem 2rem 0.5rem 2rem;
+    margin: 0.5rem 1.8rem 0.5rem 1.8rem;
 
     align-self: center;
 
@@ -252,14 +246,23 @@ img.stock-icon  {
 }
 
 img.melee {
-    height: 60px;
-    width: 60px;
+    height: 70px;
+    width: 70px;
 }
 
 img.ultimate {
+    height: 80px;
+    width: 80px;
+    image-rendering: auto;
+}
+
+img.brawl {
     height: 70px;
     width: 70px;
-    image-rendering: auto;
+}
+
+div.ultimate {
+    margin: 0.2rem 1.1rem;    
 }
 
 .hidden {
