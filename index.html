@@ -19,7 +19,7 @@
 
         <div id="content">
             <div id="header">
-                <h3>IronMan Roster Creator</h3>
+                <h3>IronMan Roster Creator</h3>               
             </div>
 
             <div id="main-body">
@@ -55,7 +55,20 @@
                             </div>
                         </div>
                     </div>
-                    <div></div>
+
+                    <div id="radio-container" class="">
+                        <p>Game</p>
+                        <div class="radio-toolbar">
+                            <input type="radio" id="melee" name="game" value="melee" onclick="changeGame('melee')" checked>
+                            <label for="melee">Melee</label>
+                            
+                            <input type="radio" id="brawl" name="game" value="brawl" onclick="changeGame('brawl')">
+                            <label for="brawl">Brawl</label>
+                            
+                            <input type="radio" id="ultimate" name="game" value="ultimate" onclick="changeGame('ultimate')">
+                            <label for="ultimate">Ultimate</label>
+                        </div>
+                    </div>
                     <div id="generate-control">
                         <p>Generate Rosters lul</p>
                         <button id="generate" onclick="handleGenerateClick()">Generate!</button>

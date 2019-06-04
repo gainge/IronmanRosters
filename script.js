@@ -1,10 +1,11 @@
 
 const MELEE = "melee";
 const ULTIMATE = "ultimate";
+const BRAWL = "brawl";
 
 const DEFAULT_IMG = "./res/crazyhand.png";
 
-var gameTitle = MELEE;
+var currentGameTitle = MELEE;
 
 var defaultImage = new Image;
 defaultImage.src = DEFAULT_IMG;
@@ -31,40 +32,6 @@ const IMAGE_DIR = "./res/stocks"
 
 
 /* Files */
-
-const meleeStocks = {
-  subdir: "melee",
-  chars: [
-    "bowser.png",
-    "dk.png",
-    "doc.png",
-    "falco.png",
-    "falcon.png",
-    "fox.png",
-    "ganon.png",
-    "gnw.png",
-    "ics.png",
-    "kirby.png",
-    "link.png",
-    "luigi.png",
-    "mario.png",
-    "marth.png",
-    "mewtwo.png",
-    "ness.png",
-    "peach.png",
-    "pichu.png",
-    "pikachu.png",
-    "puff.png",
-    "roy.png",
-    "samus.png",
-    "sheik.png",
-    "ylink.png",
-    "yoshi.png",
-    "zelda.png",
-  ],
-}
-
-
 const GAMES_DATA = "res/games.json";
 
 function loadJSON(callback) {
@@ -80,13 +47,18 @@ function loadJSON(callback) {
   xobj.send(null);
 }
 
-
+// TODO: Also set up the range validation stuff?
+// Actually I think I want to make that more dynamic regardless
+// Like who cares about currying if there's a better and easier
+//    solution available lol
 function setCurrentGame(gameTitle) {
   switch (gameTitle) {
     case MELEE:
+      currentGameTitle = MELEE;
       currentGame = games.melee;
       break;
     case ULTIMATE:
+      currentGameTitle = ULTIMATE;
       currentGame = games.ultimate;
       break;
     default:
@@ -94,25 +66,6 @@ function setCurrentGame(gameTitle) {
   }
 
   // Set up the input ranges?
-
-  // Set up the images?
-  if (!currentGame.images) {
-    loadCharacterImages(currentGame);
-  }
-}
-
-function loadCharacterImages(game) {
-  if (game.images) return;
-
-  game.images = [];
-
-  game.chars.forEach(charImage => {
-    var fileName = getImagePath(game, charImage);
-    var img = new Image(60, 60);
-    img.classList.add("hidden");
-    img.src = fileName;
-    // document.body.appendChild(img);
-  })
 }
 
 function getImagePath(game, charImage) {
@@ -171,6 +124,15 @@ function handleGenerateClick() {
 
   // Otherwise we're finally good to go!
   generateRosters(numPlayers, numChars);
+}
+
+function changeGame(game) {
+  if (game !== currentGameTitle) {
+    console.log("Setting new current game");
+    
+    setCurrentGame(game);
+  }
+
 }
 
 
@@ -355,8 +317,9 @@ function fillRoster(rosterID, numChars) {
 function getStockIcon(game, characterIndex) {
   var charImage = game.chars[characterIndex];
   var fileName = getImagePath(game, charImage);
-  var img = new Image(60, 60);
+  var img = new Image;
   img.classList.add("stock-icon");
+  img.classList.add(currentGameTitle);
   img.src = fileName;
 
   return img;
@@ -367,7 +330,7 @@ function getCharacters(numChars) {
   
   var indices = [];
   // TODO: Again, update to be more dynamic but w/e
-  var characters = meleeStocks.chars;
+  var characters = currentGame.chars;
 
   for (var i = 0 ; i < characters.length; i++) {
     indices.push(i);

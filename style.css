@@ -103,6 +103,8 @@ button {
     margin: 0;
     font-size: 2rem;
     text-align: center;
+    border-radius: 2px;
+    border: 2px solid gainsboro;
 }
 
 .input-container button {
@@ -138,6 +140,42 @@ button {
 #generate:hover {
     background: rgb(241, 184, 37);
 }
+
+
+/* Game Selector */
+#radio-container {
+    text-align: center;
+    margin-left: 2rem;
+}
+
+.radio-toolbar input[type="radio"] {
+    display:none; 
+}
+
+.radio-toolbar label {
+    display: inline-block;
+    background: rgb(9, 38, 105);
+    padding: 0.6rem 1rem;
+    margin: 0.05rem 0rem;
+    font-size: 1rem;
+    border: 2px solid #444;
+    border-radius: 4px;    
+    width: 5rem;
+    text-align: center;
+}
+
+.radio-toolbar input[type="radio"]:checked + label { 
+    background-color: rgb(79, 127, 236);
+    border-color:  #444;
+}
+
+.radio-toolbar label:hover {
+    background-color: rgb(79, 127, 236);
+}
+
+
+
+
 
 
 /* Roster Shenanigans */
@@ -210,6 +248,18 @@ button {
 
 img.stock-icon  {
     image-rendering: crisp-edges;
+    image-rendering: pixelated;
+}
+
+img.melee {
+    height: 60px;
+    width: 60px;
+}
+
+img.ultimate {
+    height: 70px;
+    width: 70px;
+    image-rendering: auto;
 }
 
 .hidden {
