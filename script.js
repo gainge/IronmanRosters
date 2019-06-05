@@ -10,6 +10,11 @@ var currentGameTitle = MELEE;
 /* CONSTANTS */
 const IMAGE_DIR = "./res/stocks"
 
+const PLAYER_INPUT = "select-players";
+const CHARS_INPUT = "select-chars";
+
+const MAX_CHARS = 100;
+
 
 /* Files */
 const GAMES_DATA = "res/games.json";
@@ -50,7 +55,14 @@ function setCurrentGame(gameTitle) {
       break;
   }
 
-  // Set up the input ranges?
+  // Make sure the character select input gets trimmed properly
+  var children = document.getElementById("select-chars").children;
+
+  [].forEach.call(children, (child, index) => {
+    var shouldHide = index >= currentGame.chars.length;
+    
+    child.classList.toggle("hidden", shouldHide);
+  });
 }
 
 function getImagePath(game, charImage) {
@@ -60,6 +72,20 @@ function getImagePath(game, charImage) {
 // Make sure melee is checked
 document.getElementById(MELEE).checked = true;
 
+// Set up the spinner!
+// I'm just going to put in a hard coded max of items
+// I'll have to revisit how I'm storing the game data
+var charsSelect = document.getElementById(CHARS_INPUT);
+
+for (var i = 0; i < MAX_CHARS; i++) {
+  // Create the new option
+  var option = document.createElement("option");
+  var value = i + 1;
+  option.setAttribute("value", value);
+  option.appendChild(document.createTextNode(value));
+  
+  charsSelect.appendChild(option);
+}
 
 
 // Load the game data
@@ -73,6 +99,10 @@ loadJSON((data) => {
 
 
 
+
+
+
+
 function rangeValidationCurry(min, max) {
   return function(val) {
     return (val >= min && val <= max);
@@ -80,8 +110,8 @@ function rangeValidationCurry(min, max) {
 }
 
 const inputRanges = new Map([
-  ["input-players", {low: 1, high: 4}],
-  ["input-chars", {low: 1, high: 26}],
+  ["PLAYER_INPUT", {low: 1, high: 4}],
+  ["CHARS_INPUT", {low: 1, high: 26}],
 ])
 
 var inputFilters = [];
@@ -96,8 +126,8 @@ inputFilters = new Map(inputFilters);
 
 // Event Handlers
 function handleGenerateClick() {
-  var numPlayers = document.getElementById("input-players").value;
-  var numChars = document.getElementById("input-chars").value;
+  var numPlayers = document.getElementById("PLAYER_INPUT").value;
+  var numChars = document.getElementById("CHARS_INPUT").value;
 
   // Do some basic input validation
   if (!isNumeric(numPlayers) || !isNumeric(numChars)) {
@@ -109,8 +139,8 @@ function handleGenerateClick() {
   numChars = parseInt(numChars);
   // TODO: restructure data so that we validate ranges based on game state 
   // For now we'll just do the basic way though
-  if (!inputFilters.get("input-players")(numPlayers) ||
-      !inputFilters.get("input-chars")(numPlayers)) {
+  if (!inputFilters.get("PLAYER_INPUT")(numPlayers) ||
+      !inputFilters.get("CHARS_INPUT")(numPlayers)) {
         alert("Input values are out of range!");
       }
 
@@ -211,7 +241,7 @@ function applyInputFilterForID(id) {
 }
 
 
-applyInputFilterForID("input-players");
+applyInputFilterForID("PLAYER_INPUT");
 
 
 // Helper functions

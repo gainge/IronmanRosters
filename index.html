@@ -27,31 +27,20 @@
                     <div class="input-parent double-stack" id="players-control">
                         <p>Players</p>
                         <div class="input-container">
-                            <div>
-                                <input id="input-players" type="text" value="1" onchange="validateRange('input-players')"/>
-                            </div>
-                            <div>
-                                <div class="double-stack">
-                                    <button id="inc-players" onclick="incField('input-players')">+</button>
-                                    <button id="dec-players" onclick="decField('input-players')">-</button>
-                                </div>
-                            </div>
+                            <select name="players" id="select-players">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>
                         </div>
                     </div>
 
                     <div>
                         <div class="input-parent double-stack" id="chars-control">
-                            <p>Characters/Player</p>
+                            <p># Characters</p>
                             <div class="input-container">
-                                <div>
-                                    <input type="text" id="input-chars" value="5" onchange="validateRange('input-chars')">
-                                </div>
-                                <div>
-                                    <div class="double-stack">
-                                        <button onclick="incField('input-chars')">+</button>
-                                        <button onclick="decField('input-chars')">-</button>
-                                    </div>
-                                </div>
+                                <select name="characters" id="select-chars"></select>
                             </div>
                         </div>
                     </div>
@@ -71,7 +60,9 @@
                     </div>
                     <div id="generate-control">
                         <p>Generate Rosters lul</p>
-                        <button id="generate" onclick="handleGenerateClick()">Generate!</button>
+                        <div id="generate-container">
+                            <button id="generate" onclick="handleGenerateClick()">Generate!</button>
+                        </div>
                     </div>
                     
                 </div>
