@@ -14,6 +14,7 @@ const PLAYER_INPUT = "select-players";
 const CHARS_INPUT = "select-chars";
 
 const MAX_CHARS = 100;
+const DEFAULT_CHARS = 5;
 
 
 /* Files */
@@ -34,10 +35,6 @@ function loadJSON(callback) {
 }
 
 
-// TODO: Also set up the range validation stuff?
-// Actually I think I want to make that more dynamic regardless
-// Like who cares about currying if there's a better and easier
-//    solution available lol
 function setCurrentGame(gameTitle) {
   switch (gameTitle) {
     case MELEE:
@@ -56,13 +53,18 @@ function setCurrentGame(gameTitle) {
   }
 
   // Make sure the character select input gets trimmed properly
-  var children = document.getElementById("select-chars").children;
+  var charsSelect = document.getElementById("select-chars");
+  var children = charsSelect.children;
 
   [].forEach.call(children, (child, index) => {
     var shouldHide = index >= currentGame.chars.length;
     
     child.classList.toggle("hidden", shouldHide);
   });
+
+  if (DEFAULT_CHARS <= currentGame.chars.length) {
+    charsSelect.value = DEFAULT_CHARS;
+  }
 }
 
 function getImagePath(game, charImage) {
@@ -99,35 +101,10 @@ loadJSON((data) => {
 
 
 
-
-
-
-
-function rangeValidationCurry(min, max) {
-  return function(val) {
-    return (val >= min && val <= max);
-  }
-}
-
-const inputRanges = new Map([
-  ["PLAYER_INPUT", {low: 1, high: 4}],
-  ["CHARS_INPUT", {low: 1, high: 26}],
-])
-
-var inputFilters = [];
-
-inputRanges.forEach(function(range, inputID) {
-  inputFilters.push([inputID, rangeValidationCurry(range.low, range.high)]);
-});
-
-// Turn it into a map so we can index by ID
-inputFilters = new Map(inputFilters);
-
-
 // Event Handlers
 function handleGenerateClick() {
-  var numPlayers = document.getElementById("PLAYER_INPUT").value;
-  var numChars = document.getElementById("CHARS_INPUT").value;
+  var numPlayers = document.getElementById(PLAYER_INPUT).value;
+  var numChars = document.getElementById(CHARS_INPUT).value;
 
   // Do some basic input validation
   if (!isNumeric(numPlayers) || !isNumeric(numChars)) {
@@ -137,12 +114,11 @@ function handleGenerateClick() {
   // Now that they're numbers, we should do some validation on the ranges just to be safe
   numPlayers = parseInt(numPlayers);
   numChars = parseInt(numChars);
-  // TODO: restructure data so that we validate ranges based on game state 
-  // For now we'll just do the basic way though
-  if (!inputFilters.get("PLAYER_INPUT")(numPlayers) ||
-      !inputFilters.get("CHARS_INPUT")(numPlayers)) {
+
+  if (!playersAndCharsAreValid(numPlayers, numChars)) {
         alert("Input values are out of range!");
-      }
+        return;
+  }
 
   // Otherwise we're finally good to go!
   generateRosters(numPlayers, numChars);
@@ -157,94 +133,23 @@ function changeGame(game) {
 
 }
 
-
-function validateRange(inputID) {
-  var input = document.getElementById(inputID);
-  var range = inputRanges.get(inputID);
-
-  if (!range) return;
-
-  console.log("yo");
-
-  var value = input.value;
-
-  if (isNumeric(value)) {
-    value = parseInt(value);
-
-    if (value < range.low) {
-      input.value = range.low;
-    } else if (value > range.high) {
-      input.value = range.high;
-    }
-
-  } else {
-    input.value = "1";
-  }
-}
-
-function applyStepCurry(stepVal) {
-  return function(inputID) {
-    var input = document.getElementById(inputID);
-
-    if (!input) return;
-
-    var value = input.value;
-
-    if (isNumeric(value)) {
-      // Everything is good to go!
-      value = parseInt(value);
-
-      // Increment only if within range
-      if (inputFilters.get(inputID)(value + stepVal)) {
-        input.value = value + stepVal;
-      } else {
-        input.value = "1";
-      }
-    } else {
-      input.value = "1";
-    }
-  }
-}
-
-var incField = applyStepCurry(1);
-var decField = applyStepCurry(-1);
-
-
-
 // Helper Functions
 function isNumeric(value) {
   return !isNaN(value);
 }
 
-
-// I'm going to try to restrict the input on my own
-// I'm going to steal that guy's strategy of using a higher order function tho
-
-function applyInputFilter(filter, input) {
-  // For every event we need to check the
-  ["input"].forEach(function(event) {
-    input.addEventListener(event, function(e) {
-      // Test out the filter against the value
-      if (filter(e.target.value) || !e.target.value) {
-
-      } else if (this.hasOwnProperty("oldValue")) {
-
-      } else {
-        
-      }
-    });
-  });
-}
-
-function applyInputFilterForID(id) {  
-  applyInputFilter(inputFilters.get(id), document.getElementById(id));
+function playersAndCharsAreValid(numPlayers, numChars) {
+  return (
+    isNumeric(numPlayers) &&
+    isNumeric(numChars) &&
+    numPlayers >= 1 &&
+    numChars >= 1 &&
+    numPlayers <= 4 &&
+    numChars <= currentGame.chars.length
+  );
 }
 
 
-applyInputFilterForID("PLAYER_INPUT");
-
-
-// Helper functions
 function joinImagePath(baseDir, subdir, fileName) {
   return baseDir + "/" + subdir + "/" + fileName;
 }
@@ -352,7 +257,6 @@ function getCharacters(numChars) {
   // This is where we can do some sick random number stuff
   
   var indices = [];
-  // TODO: Again, update to be more dynamic but w/e
   var characters = currentGame.chars;
 
   for (var i = 0 ; i < characters.length; i++) {
