@@ -14,18 +14,20 @@ const IMAGE_DIR = "./res/stocks"
 /* Files */
 const GAMES_DATA = "res/games.json";
 
+
 function loadJSON(callback) {
   var xobj = new XMLHttpRequest();
   xobj.overrideMimeType("application/json");
   xobj.open('GET', GAMES_DATA, true);
   xobj.onreadystatechange = function() {
-    if (xobj.readyState == 4 && xobj.status == "200") {
+      if (xobj.readyState == 4 && xobj.status == "200") {
       callback(xobj.responseText);
-    }
+      }
   }
 
   xobj.send(null);
 }
+
 
 // TODO: Also set up the range validation stuff?
 // Actually I think I want to make that more dynamic regardless
@@ -63,10 +65,12 @@ document.getElementById(MELEE).checked = true;
 // Load the game data
 var games = null;
 var currentGame = null;
+
 loadJSON((data) => {
   games = JSON.parse(data);
   setCurrentGame(MELEE);
 });
+
 
 
 function rangeValidationCurry(min, max) {

@@ -144,6 +144,7 @@ button {
 
 /* Game Selector */
 #radio-container {
+    margin-left: -1.2rem;
     text-align: center;
 }
 
